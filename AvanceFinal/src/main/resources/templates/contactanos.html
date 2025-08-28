@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Factory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pizza Factory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}" aria-current="page">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/eventos}">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/locales}">Locales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/pedidos}">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contactanos}">Contáctanos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-5 p-4 border rounded bg-light">
+    <h1 class="text-center text-primary mb-4">Contáctanos</h1>
+
+    <div class="row">
+        <!-- Formulario -->
+        <div class="col-md-6">
+            <form th:action="@{/contacto/guardar}" method="post">
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control"
+                           th:value="${contacto.nombre}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" id="email" name="email" class="form-control"
+                           th:value="${contacto.email}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" class="form-control" rows="4"
+                              required th:text="${contacto.mensaje}"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+
+            <!-- Mensaje de éxito -->
+            <div th:if="${mensajeExito}" class="alert alert-success mt-3" role="alert">
+                <p th:text="${mensajeExito}"></p>
+            </div>
+        </div>
+
+        <!-- Lista de mensajes registrados -->
+        <div class="col-md-6">
+            <h4 class="mt-3">Mensajes recibidos</h4>
+            <table class="table table-bordered table-sm mt-2">
+                <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Mensaje</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${contactos.content}">
+                    <td th:text="${c.nombre}"></td>
+                    <td th:text="${c.email}"></td>
+                    <td th:text="${c.mensaje}"></td>
+                    <td>
+                        <a th:href="@{/contacto/editar(id=${c.id})}" class="btn btn-sm btn-warning">Editar</a>
+                        <a th:href="@{/contacto/eliminar(id=${c.id})}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('¿Estás seguro de eliminar este mensaje?')">Eliminar</a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(contactos)}">
+                    <td colspan="4" class="text-center">No hay mensajes aún.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Navegación de páginas -->
+    <nav aria-label="Paginación de contactos" class="mt-3">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${paginaActual == 0} ? 'disabled'">
+                <a class="page-link" th:href="@{'/contacto/nuevo'(page=${paginaActual - 1})}">Anterior</a>
+            </li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(0, contactos.totalPages - 1)}"
+                th:classappend="${paginaActual == i} ? 'active'">
+                <a class="page-link" th:href="@{'/contacto/nuevo'(page=${i})}" th:text="${i + 1}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${paginaActual + 1 == contactos.totalPages} ? 'disabled'">
+                <a class="page-link" th:href="@{'/contacto/nuevo'(page=${paginaActual + 1})}">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <!-- Mapa de ubicación -->
+    <div class="mt-5">
+        <h4>Ubicación de nuestro local:</h4>
+        <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.785055206321!2d-77.03255448518284!3d-12.121307746666492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c84c9f7c0c05%3A0x17dfb2b2c45f960f!2sAv.%20Comandante%20Espinar%20266%2C%20Miraflores%2015074!5e0!3m2!1ses!2spe!4v1719259200000!5m2!1ses!2spe"
+                width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+
+<footer class="bg-primary text-white mt-5" data-bs-theme="dark">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-4 mb-3 mt-3">
+                <h5><i class="bi bi-envelope-fill me-2"></i>Contacto</h5>
+                <p><i class="bi bi-envelope"></i> pizza@factory.com</p>
+                <p><i class="bi bi-telephone-fill"></i> +51 999 999 999</p>
+            </div>
+            <div class="col-md-4 mb-3 mt-3">
+                <h5><i class="bi bi-share-fill me-2"></i>Redes Sociales</h5>
+                <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i> Facebook</a><br>
+                <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i> Twitter</a><br>
+                <a href="#" class="text-white"><i class="bi bi-instagram"></i> Instagram</a>
+            </div>
+            <div class="col-md-4 mb-3 mt-3">
+                <h5><i class="bi bi-geo-alt-fill me-2"></i>Ubícanos</h5>
+                <p>Av. Comandante Espinar 266</p>
+                <p>Miraflores, Lima - Perú</p>
+            </div>
+        </div>
+        <p class="mb-1">&copy; 2025 Todos los derechos reservados</p>
+        <p class="mb-0">RUC: 206016442X6 | Pizza Factory S.A.C.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
