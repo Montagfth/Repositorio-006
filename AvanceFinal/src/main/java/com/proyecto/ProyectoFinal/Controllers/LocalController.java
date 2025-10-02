@@ -1,12 +1,14 @@
-package com.proyecto.ProyectoFinal.Controller;
+package com.proyecto.ProyectoFinal.Controllers;
 
-import com.proyecto.ProyectoFinal.Model.Local;
-import com.proyecto.ProyectoFinal.Service.LocalService;
+// Modificacion en el paquete: Controller -> Controllers
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
+import com.proyecto.ProyectoFinal.Model.Local;
+import com.proyecto.ProyectoFinal.Service.LocalService;
 
 @Controller
 public class LocalController {
