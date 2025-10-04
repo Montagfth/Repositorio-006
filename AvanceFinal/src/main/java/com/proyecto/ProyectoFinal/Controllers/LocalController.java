@@ -1,4 +1,4 @@
-package com.proyecto.ProyectoFinal.Controller;
+package com.proyecto.ProyectoFinal.Controllers;
 
 import com.proyecto.ProyectoFinal.Model.Local;
 import com.proyecto.ProyectoFinal.Service.LocalService;
