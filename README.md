@@ -1,4 +1,4 @@
-# Proyecto "Pizzeria" {Nombre_empresa} | Lenguajes de Programacion
+# Proyecto Pizzeria "Bella Toscana" | Lenguajes de Programacion
 ###### Programador(es): Montañez Fabrizio · Vilchez Joaquim · Condori Jhosef · Castillo Claudio · Chagua Harold · Agreda Italo
 Archivo **README** instructivo al proyecto:
 ##Configuracion & Ejecucion:
