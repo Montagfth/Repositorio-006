@@ -1,0 +1,48 @@
+[33mcommit 4c1816ffdf4af714a85955cc0ac4bf0939f1e743[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Tue Oct 21 07:35:33 2025 -0500
+
+    feat: Refactor locales component to integrate API service for dynamic data loading
+    
+    - Updated locales-component.html to use dynamic image loading and improved local status display.
+    - Refactored locales-component.ts to fetch locales from the backend using GetApiService.
+    - Introduced new Local and Evento interfaces for better type safety.
+    - Removed hardcoded local data and replaced it with API-driven data fetching.
+    - Enhanced filtering logic to support city-based filtering.
+    - Added methods for formatting operating hours and checking local activity status.
+
+[33mcommit 1aee58602506f1b42b3843b5c2948e6ddd79ca7e[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Tue Oct 21 06:58:01 2025 -0500
+
+    feat: Add environment configuration and API services for backend integration
+
+[33mcommit 65068a1fadea380efb0072a43aec1ce4ea851e76[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Sun Oct 12 21:12:57 2025 -0500
+
+    fix: Update location details in contacto and locales components to reflect correct addresses
+
+[33mcommit c18aa22403ce0311a229286adba6c1ec79b6731c[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Sun Oct 12 20:47:36 2025 -0500
+
+    feat: Add @angular/animations dependency to package.json and bun.lock
+
+[33mcommit 9e892b818f8d633aed6058f93542867314a47367[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Sun Oct 12 20:18:55 2025 -0500
+
+    feat: Add locales component with styling and data management
+    
+    - Implemented SCSS styles for the locales component, including responsive design and animations.
+    - Created a TypeScript component to manage locales data, including filtering and modal functionality.
+    - Defined an interface for locales with properties such as name, address, services, and contact information.
+    - Added sample data for multiple locales with detailed information.
+    - Implemented methods for filtering locales by zone and managing modal interactions.
+
+[33mcommit e9df53428e8eb1d833da535bf938c5701fe27758[m
+Author: Cobies <fagp2014@gmail.com>
+Date:   Sun Oct 12 18:00:16 2025 -0500
+
+    initial commit
